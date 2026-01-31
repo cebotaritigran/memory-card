@@ -1,15 +1,12 @@
-function CardGrid({ pokemon }) {
+function CardGrid({ pokemonImgUrl, pokemonName }) {
 
 
     return (
         <>
-
             <div className="card">
-                <img src={pokemon} alt={pokemon}></img>
+                <img src={pokemonImgUrl} alt={pokemonImgUrl}></img>
+                <div className="pokemon-name">{pokemonName}</div>
             </div>
-
-
-
         </>
     )
 

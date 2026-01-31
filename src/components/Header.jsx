@@ -1,8 +1,15 @@
-function Header() {
+function Header({ score }) {
     return (
         <>
-            <div className="header">Memory Game</div>
-            <div className="header-infor">Each click the game shuffles and remembers who you clicked on; try not to click the same Card twice!</div>
+            <div className="header-container">
+                <div>
+                    <div className="header">Pokemon Memory Game</div>
+                    <div className="header-info">Each click the game shuffles and remembers who you clicked on; try not to click the same Card twice!</div>
+                </div>
+                <div>
+                    <div>{score}</div>
+                </div>
+            </div>
         </>
     )
 }

@@ -6,28 +6,64 @@ import { useEffect, useState } from "react";
 
 function App() {
 
-  const [pokemons, setPokemons] = useState([]);
 
-  const selectedPokemons = [
-    25, 6, 778, 197, 10038, 1, 448, 10205, 150, 428
-  ];
+
+
+
+  const [pokemonsInfo, setPokemonsInfo] = useState([]);
+  const [score, setScore] = useState(0);
+  // const [bestScore, setBestScore] = useState(0);
+
+  // const pokemonsInfo = [
+  //   // {
+  //   //   pokemonName: "idk",
+  //   //   pokemonImgUrl: "",
+  //   //   pokemonID: 1
+  //   // }
+  // ];
+
+  // let randomPokemons = [];
   // fetch data ->
   // randomize cards in this code with their respectful key ->
   // on click change state of the card 'isSelected' ->
   // update score ->
-  // if chosen already 'isSelected' restart the game
+  // if chosen already 'isSelected' restart the game ->
+  // if successfuly selected all cards without selecting duplicates win the game
   useEffect(() => {
-    let someArray = []
+    const selectedPokemons = [
+      25, 6, 67, 197, 10038, 1, 448, 10205, 150, 428, 38, 78, 502, 671, 31
+    ];
+    let tmpArray = []
+    let tmpPokemonInfo = []
     async function getPokemonData() {
       try {
 
         for (let i = 0; i < selectedPokemons.length; i++) {
+          // random pokemons selector
+          // let random = Math.floor(Math.random() * 1000);
+          // console.log(random)
+          // const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + random)
           const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + selectedPokemons[i])
           const data = await response.json();
-          someArray.push(data.sprites?.other?.['official-artwork']?.['front_default'])
-        }
+          // setPokemonsInfo([
+          //   ...pokemonsInfo,
+          //   {
+          //     pokemonName: data.name,
+          //     pokemonImgUrl: data.sprites?.other?.['official-artwork']?.['front_default'],
+          //     pokemonID: data.id
+          //   }
+          // ])
 
-        setPokemons(someArray)
+          tmpPokemonInfo.push({
+            pokemonName: data.name,
+            pokemonImgUrl: data.sprites?.other?.['official-artwork']?.['front_default'],
+            pokemonID: data.id,
+            isSelected: false,
+          })
+          tmpArray.push(data.sprites?.other?.['official-artwork']?.['front_default'])
+        }
+        setPokemonsInfo(tmpPokemonInfo)
+
 
       } catch (error) {
         console.log(error);
@@ -36,23 +72,65 @@ function App() {
     getPokemonData();
 
   }, []);
-  console.log(pokemons)
+
+
+
+
+  function handleClick(e, pokemon) {
+
+    //if pokemon is already selected, the game restarts, if not pokemon is marked as selected(clicked,chosen)
+    if (pokemon.isSelected == true) {
+      console.log("reset")
+      setScore(0)
+      // reset isSelected on every pokemon
+      pokemonsInfo.map((pokemonInfo) => {
+        pokemonInfo.isSelected = false;
+      })
+    } else {
+      pokemon.isSelected = true;
+      setScore(score + 1);
+    }
+
+
+    // checking if every pokemon is isSelected is true by every and returning true if isselected is true
+    if (pokemonsInfo.every(pokemon => pokemon.isSelected)) {
+      console.log("you win")
+    }
+
+    console.log(pokemon)
+
+
+
+    //we need a new array thats why we do ...pokemonsInfo so that react understands that its a new array and to rerendder page
+    let tmpArray = [...pokemonsInfo].sort(() => Math.random() - 0.5)
+    setPokemonsInfo(tmpArray)
+    console.log(pokemonsInfo)
+  }
+
 
   return (
     <>
       <div className='project-container'>
         <div className='header'>
-          <Header></Header>
+          <Header score={score}></Header>
         </div>
         <div className='body'>
           <div className="card-container">
-            {pokemons.map((pokemon) => {
-              return (<CardGrid pokemon={pokemon}></CardGrid>)
+            {pokemonsInfo.map((pokemonInfo) => {
+              return (
+                <div key={pokemonInfo.pokemonID} onClick={(e) => { handleClick(e, pokemonInfo) }}>
+                  <CardGrid
+                    pokemonImgUrl={pokemonInfo.pokemonImgUrl}
+                    pokemonName={pokemonInfo.pokemonName}
+                  ></CardGrid>
+                </div>
+              )
             })}
           </div>
+          {/* <button variant="primary" className="shuffler" onClick={() => { handleShuffle() }}>shuffle</button> */}
         </div>
         <div className='footer'></div>
-      </div>
+      </div >
 
     </>
   )
