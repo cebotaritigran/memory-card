@@ -1,16 +1,62 @@
-# React + Vite
+# 🧠 Memory Card Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast, interactive **memory game** built with **React** and **Vite**, focused on clean state management, performance, and user experience.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** https://memory-card-gametc.netlify.app/  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📌 Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project demonstrates practical frontend skills including **React hooks**, **state-driven UI**, and **deterministic game logic**.  
+Users must select each card only once — repeated selections reset the score, encouraging attention and memory.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Key Highlights
+
+- ⚛️ Modern **React** with functional components and hooks
+- ⚡ **Vite** for fast builds and optimized dev experience
+- 🔀 Card shuffling logic after each interaction
+- 📊 Current score & best score tracking
+- 📱 Responsive UI
+- 🚀 Deployed with **Netlify**
+
+---
+
+## 🛠️ Tech Stack
+
+- **React**
+- **Vite**
+- **JavaScript (ES6+)**
+- **CSS**
+- **Netlify**
+
+---
+
+## 🧠 What This Project Shows
+
+- Correct usage of **React state & effects**
+- Immutable data handling
+- Clean component structure
+- UI updates driven entirely by state
+- Basic game logic and edge-case handling
+- Production-ready deployment workflow
+
+---
+
+## 🖼️ Screenshots
+
+> Screenshots can be added in a `/screenshots` folder.
+
+![Gameplay](src/assets/images/gameplay.png)
+
+---
+
+## 🚀 Installation & Local Setup
+
+```bash
+git clone https://github.com/cebotaritigran/memory-card.git
+cd memory-card
+npm install
+npm run dev
