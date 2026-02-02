@@ -8,6 +8,24 @@
     cursor: url(http://www.javascriptkit.com/dhtmltutors/cursor-hand.gif), auto;
 }
 
+@keyframes bgMove {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+.project-container {
+    background: radial-gradient(circle at 30% 30%,
+            rgb(143, 33, 33),
+            rgb(29, 85, 149),
+            rgb(148, 34, 34));
+    background-size: 300% 300%;
+    animation: bgMove 12s ease-in-out infinite alternate;
+}
 
 
 .project-container {
@@ -19,13 +37,12 @@
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    background: #EEAECA;
-    background: radial-gradient(circle, rgb(248, 98, 163) 0%, rgb(73, 113, 159) 100%);
+    color: white;
+
 }
 
 .header-container {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
     gap: 10px;
@@ -33,7 +50,7 @@
 }
 
 .header {
-    font-size: 24px;
+    font-size: 44px;
 }
 
 .header-info {
@@ -49,7 +66,8 @@
 .card-container {
     display: flex;
     flex-wrap: wrap;
-
+    gap: 20px;
+    justify-content: center;
     height: 500px;
     flex: 1 0 0;
 
@@ -57,14 +75,27 @@
 
 .card {
     flex: 1 0 30%;
-    border: 1px solid black;
-    background-color: rgb(91, 47, 131);
-    border-radius: 10px;
-    margin: 20px;
+    border: 3px solid rgb(255, 182, 71);
+    background-color: rgb(71, 5, 134);
+    border-radius: 20px;
     padding: 10px;
     cursor: pointer;
 
 }
+
+
+
+/* .card:hover {
+    scale: 1.05;
+    opacity: 1;
+    background: #fd5;
+    box-shadow:
+        inset 10px 10px 20px #ffcb,
+        inset -10px -10px 20px #ea18;
+    border-radius: 20px;
+    transition: 0.7s cubic-bezier(.51, .61, 0, 2.3);
+} */
+
 
 .card img {
     flex: 1 0 0;
@@ -74,7 +105,7 @@
 }
 
 .pokemon-name {
-    font-size: 18px;
+    font-size: 22px;
     cursor: pointer;
     color: white;
     background-color: rgb(199, 81, 42);
@@ -84,4 +115,10 @@
     border: 1px solid black;
     padding: 5px;
     border-radius: 10px;
+}
+
+.card:hover .pokemon-name {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    transition: 0.6s ease-in-out;
 }

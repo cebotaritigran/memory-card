@@ -1,4 +1,4 @@
-
+import Tilt from 'react-parallax-tilt';
 import { Header } from "./Header";
 import { CardGrid } from "./CardGrid";
 import '../styles/App.css'
@@ -12,6 +12,7 @@ function App() {
 
   const [pokemonsInfo, setPokemonsInfo] = useState([]);
   const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
   // const [bestScore, setBestScore] = useState(0);
 
   // const pokemonsInfo = [
@@ -81,6 +82,10 @@ function App() {
     //if pokemon is already selected, the game restarts, if not pokemon is marked as selected(clicked,chosen)
     if (pokemon.isSelected == true) {
       console.log("reset")
+      if (score > bestScore) {
+        setBestScore(score)
+      }
+
       setScore(0)
       // reset isSelected on every pokemon
       pokemonsInfo.map((pokemonInfo) => {
@@ -89,6 +94,7 @@ function App() {
     } else {
       pokemon.isSelected = true;
       setScore(score + 1);
+
     }
 
 
@@ -112,24 +118,36 @@ function App() {
     <>
       <div className='project-container'>
         <div className='header'>
-          <Header score={score}></Header>
+          <Header score={score} bestScore={bestScore}></Header>
         </div>
         <div className='body'>
           <div className="card-container">
             {pokemonsInfo.map((pokemonInfo) => {
               return (
-                <div key={pokemonInfo.pokemonID} onClick={(e) => { handleClick(e, pokemonInfo) }}>
-                  <CardGrid
-                    pokemonImgUrl={pokemonInfo.pokemonImgUrl}
-                    pokemonName={pokemonInfo.pokemonName}
-                  ></CardGrid>
-                </div>
+                <Tilt
+                  glareEnable={true}
+                  glareMaxOpacity={0.7}
+                  glareColor="rgb(255, 154, 86)"
+                  glarePosition="all"
+                  scale={1.1}
+                  glareBorderRadius="20px"
+                >
+                  <div key={pokemonInfo.pokemonID} onClick={(e) => { handleClick(e, pokemonInfo) }}>
+                    <CardGrid
+                      pokemonImgUrl={pokemonInfo.pokemonImgUrl}
+                      pokemonName={pokemonInfo.pokemonName}
+                    >
+                    </CardGrid>
+                  </div>
+                </Tilt>
               )
             })}
           </div>
           {/* <button variant="primary" className="shuffler" onClick={() => { handleShuffle() }}>shuffle</button> */}
         </div>
-        <div className='footer'></div>
+        <div className='footer'>
+          <div></div>
+        </div>
       </div >
 
     </>
